@@ -19,6 +19,7 @@ class Client(Base):
     phone = Column(String(15))
     address = Column(String(255))
     service = Column(String(45))
+<<<<<<< HEAD
     intent = Column(String(550))
     user_text = Column(String(800))
 
@@ -30,5 +31,7 @@ class People(Base):
     login = Column(String(50))
     role = Column(String(55))
     password = Column(String(10))
+=======
+>>>>>>> 8dcd97331709b8b89578eed676f75abdbfe3a14f
 
 Base.metadata.create_all(bind=engine)
