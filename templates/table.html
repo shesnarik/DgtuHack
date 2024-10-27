@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Настройка ключевых слов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form input, form textarea, form button {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        form button {
+            grid-column: span 2;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        form button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h2>Список намерений и ключевых слов</h2>
+    <form method="POST">
+        <input type="text" name="contract" placeholder="Номер договора" required>
+        <input type="text" name="keyword" placeholder="Ключевое слово" required>
+        <input type="text" name="intent" placeholder="Намерение" required>
+        <input type="text" name="phone" placeholder="Номер телефона" required>
+        <input type="email" name="email_address" placeholder="Email адрес" required>
+        <textarea name="user_text" placeholder="Описание" rows="3" required></textarea>
+        <button type="submit">Добавить</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Номер договора</th>
+            <th>Ключевое слово</th>
+            <th>Намерение</th>
+            <th>Телефон</th>
+            <th>Адрес</th>
+            <th>Описание</th>
+            <th>Действия</th>
+        </tr>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client.id }}</td>
+            <td>{{ client.contract }}</td>
+            <td>{{ client.service }}</td>
+            <td>{{ client.intent }}</td>
+            <td>{{ client.phone }}</td>
+            <td>{{ client.address }}</td>
+            <td>{{ client.user_text }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('delete_intent', id=client.id) }}" style="display: inline;">
+                    <button type="submit" class="delete-button">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
